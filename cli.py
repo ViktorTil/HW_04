@@ -2,20 +2,20 @@ commands = ["hello", ["good bye", "close", "exit", "bye", "esc", "q"], "add", "c
 phone_book = {"Vasya": "0505436565", "Lesya" : "0674231111"}
 
 
-def error_with_func(arg):
+def error_with_func(arg0, arg1):
     def input_error(func):
         def proc_error(*args):
             try:
                 func(*args)
             except IndexError:
-                print(f'Добавьте все данные в команду {arg}')
+                print(f'Добавьте правильно: {arg1} в команду {arg0}')
             except ValueError:
                 pass
         return proc_error
     return input_error
 
 
-@error_with_func('add')  
+@error_with_func('add', 'имя и телефон')  
 def add_phone(cont):
     contact = cont.split(' ')        
     for phone in phone_book:
@@ -31,7 +31,7 @@ def add_phone(cont):
 
         
 
-@error_with_func('change')
+@error_with_func('change', 'имя и телефон')
 def change(contact):
     chng_cont = contact.split(' ')
     number_chng = f'Нет контакта:{chng_cont[1]} в Вашем списке'
@@ -46,7 +46,7 @@ def change(contact):
             
     print(number_chng)
 
-@error_with_func('phone')
+@error_with_func('phone', 'имя')
 def phone(contact):
     c_number=contact.split(" ")
     number = f'В ваших контактах отсутствует: {c_number[1]}'
