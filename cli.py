@@ -8,7 +8,7 @@ def error_with_func(arg0, arg1):
             try:
                 func(*args)
             except IndexError:
-                print(f'Добавьте правильно: {arg1} в команду {arg0}')
+                print(f'Добавьте правильно: \033[31m{arg1}\033[0m в команду: \033[34m{arg0}\033[0m')
             except ValueError:
                 pass
         return proc_error
