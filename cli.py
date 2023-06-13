@@ -21,11 +21,11 @@ def add_phone(cont):
     for phone in phone_book:
             
         if phone.lower() == contact[1].lower():
-            print(f'Контакт {contact[1]} уже есть в книге с номером {phone_book.get(phone)}')
+            print(f'Контакт: {contact[1]} уже есть в книге с номером:{phone_book.get(phone)}')
             return True
                 
     phone_book[contact[1]] = contact[2]   
-    number_add = f'ok'
+    number_add = f'Вы добавили контакт:{contact[1]} с номером: {contact[2]} в список ваших контактов'
         
     print(number_add)
 
@@ -34,7 +34,7 @@ def add_phone(cont):
 @error_with_func('change')
 def change(contact):
     chng_cont = contact.split(' ')
-    number_chng = f'Нет контакта {chng_cont[1]} в Вашем списке'
+    number_chng = f'Нет контакта:{chng_cont[1]} в Вашем списке'
     
     for phone in phone_book:
         
@@ -42,17 +42,17 @@ def change(contact):
             continue
         else:
             phone_book[phone] = chng_cont[2]
-            number_chng = f'Контакт {chng_cont[1]} изменен' 
+            number_chng = f'Номер контакта: {chng_cont[1]} изменен на: {chng_cont[2]}' 
             
     print(number_chng)
 
 @error_with_func('phone')
 def phone(contact):
     c_number=contact.split(" ")
-    number = f'В ваших контактах отсутствует {c_number[1]}'
+    number = f'В ваших контактах отсутствует: {c_number[1]}'
     for phone in phone_book:
         if c_number[1].lower() == phone.lower():
-            number = f'{phone_book.get(phone)}'
+            number = f'Номер контакта {phone}: {phone_book.get(phone)}'
     print(number)
     
     
@@ -77,8 +77,9 @@ def reply(command):
     return bot
 
 def show_all(x):
+    print(f'На данный момент в вашей телефонной книге есть следующие контакты:')
     for name, phone in phone_book.items():
-        print(f'Name: {name}, phone number {phone}')
+        print(f'Имя: {name}, телефон: {phone}')
 
 
 
@@ -88,8 +89,7 @@ answers = ["How can I help you?", "Good bye!",add_phone, change, phone, show_all
 def main():
     working_bot= True
     while working_bot:
-        print('->')
-        command = input()
+        command = input('->')
         working_bot = reply(command)
         
 if __name__ == '__main__':
